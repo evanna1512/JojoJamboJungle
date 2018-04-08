@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{018FF0D2-1A2E-413A-85F1-A7C74541449C}</ProjectGuid>
-    <RootNamespace>JojoJamboJungle</RootNamespace>
+    <ProjectGuid>{F362CD92-647C-470E-9D7F-0AA028B01C86}</ProjectGuid>
+    <RootNamespace>JojoJamboJungleServer</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\eve\Desktop\SDL2_net-devel-2.0.1-VC\SDL2_net-2.0.1\include;C:\Users\eve\Desktop\SDL2_image-devel-2.0.3-VC\SDL2_image-2.0.3\include;C:\Users\eve\Desktop\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\eve\Desktop\SDL2_net-devel-2.0.1-VC\SDL2_net-2.0.1\lib\x86;C:\Users\eve\Desktop\SDL2_image-devel-2.0.3-VC\SDL2_image-2.0.3\lib\x86;C:\Users\eve\Desktop\SDL2-devel-2.0.8-VC\SDL2-2.0.8\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\eve\Desktop\SDL2-devel-2.0.8-VC\SDL2-2.0.8\include;C:\Users\eve\Desktop\SDL2_image-devel-2.0.3-VC\SDL2_image-2.0.3\include;C:\Users\eve\Desktop\SDL2_net-devel-2.0.1-VC\SDL2_net-2.0.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\eve\Desktop\SDL2-devel-2.0.8-VC\SDL2-2.0.8\lib\x86;C:\Users\eve\Desktop\SDL2_image-devel-2.0.3-VC\SDL2_image-2.0.3\lib\x86;C:\Users\eve\Desktop\SDL2_net-devel-2.0.1-VC\SDL2_net-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,7 +81,6 @@
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,19 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Connection.cpp" />
-    <ClCompile Include="JohnPlayer.cpp" />
-    <ClCompile Include="JojoJamboJungleClient.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Texture.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Connection.h" />
-    <ClInclude Include="JohnPlayer.h" />
-    <ClInclude Include="JojoJamboJungleClient.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,11 @@
 #include <stdio.h>
+#include <thread>
 #include "JojoJamboJungleClient.h"
+#include "JohnPlayer.h"
+#include "utils.h"
+
+UDPConnection udpConnection;
+std::thread t;
 
 JojoJamboJungleClient::JojoJamboJungleClient()
 {
@@ -102,6 +108,59 @@ void JojoJamboJungleClient::closeGame()
 	SDL_Quit();
 }
 
+void JojoJamboJungleClient::connect() {
+
+	
+	std::string IP;
+	int32_t localPort = 0;
+	int32_t remotePort = 0;
+
+	std::cout
+		<< "\n==========================================================================================================\n"
+		<< "UDP connection - A simple test for UDP connections using SDL_Net!"
+		<< "\n==========================================================================================================\n"
+		<< "You'll be asked to enter the following :"
+		<< "\n\tRemote IP   : The IP you want to connect to"
+		<< "\n\tRemote Port : The port you want to connect to"
+		<< "\n\tLocal port  : Uour port"
+		<< "\nLocal port should be the same as remote port on the other instance of the application"
+		<< "\n==========================================================================================================\n\n";
+
+	//std::cout << "Enter remote IP ( 127.0.0.1  for local connections ) : ";
+	//std::cin >> IP;
+	//std::cout << "...and remote port : ";
+	//std::cin >> remotePort;
+
+	//std::cout << "Enter local port : ";
+	//std::cin >> localPort;
+
+	udpConnection.Init("127.0.0.1", 321321, 123123);
+
+	uint8_t command = 0;
+
+	while (!udpConnection.WasQuit())
+	{
+		std::cout
+			<< "Your command : "
+			<< "\n\t0 : Send a message"
+			<< "\n\t1 : Quit"
+			<< "\n\t2 : Check for data"
+			<< std::endl;
+
+		std::cin >> command;
+
+		if (command == '0')
+			udpConnection.Send("This is a test");
+		else if (command == '1')
+			udpConnection.Send("quit");
+		else if (command == '2')
+			udpConnection.CheckForData();
+		else
+			std::cout << "Illegal command\n";
+	}
+
+}
+
 void JojoJamboJungleClient::processGame()
 {
 	//TO DO: This code should be replaced
@@ -111,7 +170,12 @@ void JojoJamboJungleClient::processGame()
 		try
 		{
 			loadGameResources();
-			
+
+			//try to init connection in new thread
+			t = std::thread(&JojoJamboJungleClient::connect, this);
+			//std::thread t(&JojoJamboJungleClient::connect, this);
+			t.detach();
+
 			try
 			{
 				mainLoop();
@@ -140,6 +204,7 @@ void JojoJamboJungleClient::mainLoop() {
 
 	bool quitGame = false;
 	SDL_Event e;
+	JohnPlayer john(50, 50);
 
 	while (!quitGame)
 	{
@@ -152,11 +217,24 @@ void JojoJamboJungleClient::mainLoop() {
 
 			if (e.key.keysym.sym == SDLK_RIGHT) {
 
+				int currentPosition = john.getPositionX();
+				currentPosition += 5;
+				john.setPositionX(currentPosition);
+
+				udpConnection.Send("Position x: " + std::to_string(john.getPositionX()) \
+					+ " position y: " + std::to_string(john.getPositionY()));
 				//xPlayer += 5;
 			}
 
 			if (e.key.keysym.sym == SDLK_LEFT) {
 
+				int currentPosition = john.getPositionX();
+				currentPosition -= 5;
+				john.setPositionX(currentPosition);
+
+
+				udpConnection.Send("Position x: " + std::to_string(john.getPositionX()) \
+					+ " position y: " + std::to_string(john.getPositionY()));
 				//xPlayer -= 5;
 			}
 		}
@@ -168,9 +246,10 @@ void JojoJamboJungleClient::mainLoop() {
 		//Render
 		this->backgroundTexture->render(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		this->baseTexture->render(0, SCREEN_HEIGHT - this->baseTexture->getTextureHeight(), SCREEN_WIDTH, this->baseTexture->getTextureHeight());
-		this->playerTexture->render(50, 390, 2 * this->playerTexture->getTextureWidth(), 2 * this->playerTexture->getTextureHeight());
+		this->playerTexture->render(50 + john.getPositionX(), 390, 2 * this->playerTexture->getTextureWidth(), 2 * this->playerTexture->getTextureHeight());
 
 		//Update
 		SDL_RenderPresent(this->renderer);
+
 	}
 }

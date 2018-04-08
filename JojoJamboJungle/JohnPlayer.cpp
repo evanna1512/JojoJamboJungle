@@ -9,6 +9,12 @@ JohnPlayer::JohnPlayer()
 	this->position.y = 0;
 }
 
+JohnPlayer::JohnPlayer(int x, int y)
+{
+	this->position.x = x;
+	this->position.y = y;
+}
+
 JohnPlayer::JohnPlayer(Position & position)
 {
 	this->position.x = position.x;
@@ -19,12 +25,12 @@ JohnPlayer::~JohnPlayer()
 {
 }
 
-const int JohnPlayer::getPositionX()
+int JohnPlayer::getPositionX()
 {
 	return this->position.x;
 }
 
-const int JohnPlayer::getPositionY()
+int JohnPlayer::getPositionY()
 {
 	return this->position.y;
 }

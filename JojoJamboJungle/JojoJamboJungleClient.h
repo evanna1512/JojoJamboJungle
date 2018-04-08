@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_image.h>
+#include "Connection.h"
 #include "Texture.h"
 
 class JojoJamboJungleClient {
@@ -23,6 +24,7 @@ public:
 	void closeGame();
 	void processGame();
 	void mainLoop();
+	void connect();
 };
 
 

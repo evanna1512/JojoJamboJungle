@@ -22,8 +22,8 @@ public:
 	virtual ~Player() {};
 
 	// Positions of a player
-	virtual const int getPositionX() const = 0;
-	virtual const int getPositionY() const = 0;
+	//virtual const int getPositionX() const = 0;
+	//virtual const int getPositionY() const = 0;
 	virtual void setPositionX(const int&) = 0;
 	virtual void setPositionY(const int&) = 0;
 	

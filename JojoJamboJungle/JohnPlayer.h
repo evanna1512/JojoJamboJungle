@@ -8,12 +8,13 @@ protected:
 
 public:
 	JohnPlayer();
+	JohnPlayer(int x, int y);
 	JohnPlayer(Position&);
 	~JohnPlayer();
 
 	// Positions of a player
-	const int getPositionX();
-	const int getPositionY();
+	int getPositionX();
+	int getPositionY();
 	void setPositionX(const int&);
 	void setPositionY(const int&);
 

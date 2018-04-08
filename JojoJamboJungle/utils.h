@@ -1,12 +1,12 @@
 #pragma once
 
-struct Position {
+typedef struct Position {
 	int x;
 	int y;
-};
+}Position;
 
 
-struct Dim2D {
+typedef struct Dim2D {
 	const int width;
 	const int height;
-};
+}Dim2D;
